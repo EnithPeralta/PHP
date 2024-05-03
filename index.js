@@ -11,7 +11,7 @@ function cargarDatos() {
             <td>${row.nombre}</td>
             <td>${row.descripcion}</td>
             <td>
-                <button class="btn btn-outline-info">
+                <button class="btn btn-outline-warning">
                     <ion-icon name="create-outline"></ion-icon>
                 </button>
                 <button class="btn btn-outline-danger" onClick="eliminarProducto(${row.id})">
@@ -24,10 +24,10 @@ function cargarDatos() {
     });
 }
 function eliminarProducto(id) {
-    fetch("./controllers/eliminarProductoController.php?id="+id)
+  fetch("./controllers/eliminarProductoController.php?id=" + id)
     .then((response) => response.text())
     .then((data) => {
-      alert("Ok")
+      alert("Ok");
     });
 }
 cargarDatos();
