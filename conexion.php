@@ -19,13 +19,11 @@ class Conexion{
     } catch(PDOException $e) {
         print "¡Error!: " . $e->getMessage();
     }}
-    public function Desconectar(){
-        try{
-            $this->conexion=null;
+    #public function Desconectar(){
+    #   try{
+    #        $this->conexion=null;
            // echo('Desconexion con exito');
-        }catch(PDOException $e) {
-            print "¡Error al desconectar!: " . $e->getMessage();
-        }
-    }
+    #    }catch(PDOException $e) {
+    #        print "¡Error al desconectar!: " . $e->getMessage();}}
 }
 ?>
