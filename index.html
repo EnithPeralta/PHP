@@ -27,6 +27,7 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
 
     <title>Document</title>
   </head>
@@ -64,10 +65,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1
-              class="modal-title fs-5 "
-              id="exampleModalLabel"
-            >
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
               Agregar Producto
             </h1>
             <button
@@ -80,15 +78,35 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" />
+                <label for="id" class="form-label">Id</label>
+                <input
+                  type="text"
+                  id="id"
+                  class="form-control"
+                  name="id"
+                  hidden
+                />
+                <input id="id" type="text" class="form-control" name="id" />
+              </div>
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input id="nombre" type="text" class="form-control" name="nombre" />
               </div>
               <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <textarea type="text" class="form-control"></textarea>
+                <textarea
+                  id="descripcion"
+                  type="text"
+                  class="form-control"
+                  name="descripcion"
+                ></textarea>
               </div>
-              <button type="submit" class="btn btn-outline-primary">
-                Submit
+              <button
+                id="submit-btn"
+                type="submit"
+                class="btn btn-outline-primary"
+              >
+                Aceptar
               </button>
             </form>
           </div>
