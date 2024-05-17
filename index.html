@@ -32,7 +32,7 @@
     <title>Document</title>
   </head>
   <body class="container">
-    <table class="table">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>Id</th>
@@ -90,7 +90,12 @@
               </div>
               <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input id="nombre" type="text" class="form-control" name="nombre" />
+                <input
+                  id="nombre"
+                  type="text"
+                  class="form-control"
+                  name="nombre"
+                />
               </div>
               <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
@@ -103,8 +108,8 @@
               </div>
               <button
                 id="submit-btn"
-                type="submit"
-                class="btn btn-outline-primary"
+                type="button"
+                class="btn btn-outline-info"
                 onclick="agregarProducto()"
               >
                 Aceptar
@@ -114,5 +119,14 @@
         </div>
       </div>
     </div>
+    <div
+      class="alert alert-success"
+      id="alerMessange"
+      hidden
+      role="alert"
+    ></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -10,16 +10,32 @@ function cargarDatos() {
                 <td>${row.id}</td>
                 <td>${row.nombre}</td>
                 <td>${row.descripcion}</td>
-                <td><button onclick='traerDatos(${row.id})' type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" >Actualizar</button></td>
-                <td><button class="btn btn-outline-danger" onClick='eliminarProducto(${row.id})'>Eliminar</button></td>
-
+                <td><button onclick='traerDatos(${row.id})' type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" >Editar</button></td>
+                <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal-${row.id}">Eliminar</button>
+                <div class="modal fade" id="confirmModal-${row.id}" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel-${row.id}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="confirmModalLabel">Deseas eliminar este registro</h5>
+                    </div>
+                    <div class="modal-body">
+                       ¿Estás seguro de que deseas continuar?
+                    </div>
+                    <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancelar</button>
+                          <button class="btn btn-outline-danger" data-dismiss="modal" onClick='eliminarProducto(${row.id})'>Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+        </td>
             `;
         tablaDatos.appendChild(tr);
       });
     });
 }
 
-function limpiarFormulario(){
+function limpiarFormulario() {
   var inputId = document.getElementById("id");
   var inputNombre = document.getElementById("nombre");
   var inputDescripcion = document.getElementById("descripcion");
@@ -38,12 +54,15 @@ function guardarProducto(id, nombre, descripcion) {
     });
 }
 
+const modal = document.getElementById("exampleModal");
+console.log(modal);
+
 function eliminarProducto(id) {
   fetch("./controllers/eliminarProductoController.php?id=" + id)
     .then((response) => response.text())
     .then((data) => {
-      console.log(data);
       cargarDatos();
+      mostrarAlerta("Se Elimino Con Exito");
     });
 }
 
@@ -57,9 +76,10 @@ function agregarProducto() {
   )
     .then((response) => {
       return response.text();
-
     })
     .then((data) => {
+      cargarDatos();
+      mostrarAlerta("Se Agregado Con Exito");
       console.log(data);
       document.getElementById("id").value = "";
       document.getElementById("nombre").value = "";
@@ -89,7 +109,12 @@ function traerDatos(id) {
     var valDescripcion = inputDescripcion.value;
     limpiarFormulario();
     guardarProducto(valId, valNombre, valDescripcion);
+    mostrarAlerta("Se Actualizo Con Exito");
   };
 }
-
+function mostrarAlerta(mensage) {
+  var alerta = document.getElementById("alerMessange");
+  alerta.innerHTML = mensage;
+  alerta.hidden = false;
+}
 cargarDatos();
