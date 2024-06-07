@@ -18,7 +18,7 @@ switch ($method) {
     break;
   case 'PUT':
     $data = json_decode(file_get_contents('php://input'), true);
-    $productos = $productoDAO->actualizarProducto(data->id, $data->nombre, $data->descripcion);
+    $productos = $productoDAO->actualizarProducto($data->id, $data->nombre, $data->descripcion);
    echo(json_encode($productos));
     break;
   case 'DELETE':

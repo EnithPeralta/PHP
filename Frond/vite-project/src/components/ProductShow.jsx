@@ -21,49 +21,64 @@ const ProductShow = ({ eliminarProduct, products, setProducts }) => {
     }, 500);
   };
 
-  const validar = () => {
-    const agregarProduct = async () => {
-      const producto = {
-        nombre,
-        descripcion,
-      };
-    if (
-      fetch("http://localhost/php/api/index.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(agregarProduct),
-      })
-        .then(async (response) => {
-          if (!response.ok) {
-            const text = await response.text();
-            throw new Error(text);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setProducts((productos) => [...productos, data]);
-          Swal.fire({
-            text: "El producto ha sido agregado con éxito.",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-          });
-        })
-        .catch((error) => {
-          console.error("Error al agregar el producto:", error);
-          Swal.fire({
-            text: "Hubo un error al agregar el producto. Por favor revisa la consola para más detalles.",
-            icon: "error",
-            confirmButtonText: "Aceptar",
-          });
-        })
-    );
-    else (
-      console.log(agregarProduct)
-    )
+  const validar = async () => {
+    if (operacion === 1) {
+      const producto = { nombre, descripcion };
+      try {
+        const response = await fetch("http://localhost/php/api/index.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(producto),
+        });
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(text);
+        }
+        const data = await response.json();
+        setProducts((productos) => [...productos, data]);
+        Swal.fire({
+          text: "El producto ha sido agregado con éxito.",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+      } catch (error) {
+        console.error("Error al agregar el producto:", error);
+        Swal.fire({
+          text: "Hubo un error al agregar el producto. Por favor revisa la consola para más detalles.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    } else {
+      const producto = { id, nombre, descripcion };
+
+      try {
+        const response = await fetch(`http://localhost/php/api/index.php`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(producto),
+        });
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(text);
+        }
+        const data = await response.json();
+        setProducts((productos) => productos.map((prod) => (prod.id === id ? data : prod)));
+        Swal.fire({
+          text: "El producto ha sido editado con éxito.",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+      } catch (error) {
+        console.error("Error al editar el producto:", error);
+        Swal.fire({
+          text: "Hubo un error al editar el producto. Por favor revisa la consola para más detalles.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    }
   };
-};
 
 const deleteProduct = (id) => {
   Swal.fire({
